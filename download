@@ -1,0 +1,22 @@
+echo "Downloading $1 to $2"
+mkdir -p $2
+cd $2
+wget \
+     --recursive \
+     --page-requisites \
+     --convert-links \
+     -nd \
+     $1
+
+file_start=`head -c 3 index.html`
+jekyll_delimiter="---"
+if [ $file_start == $jekyll_delimiter ]
+then
+  echo "File already processed"
+ # exit 0
+fi
+
+echo '---
+
+---' | cat - index.html > temp && mv temp index.html
+
