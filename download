@@ -19,4 +19,5 @@ fi
 echo '---
 
 ---' | cat - index.html > temp && mv temp index.html
+cat '{% include analytics %}' >> index.html
 
