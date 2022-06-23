@@ -2,6 +2,7 @@ echo "Downloading $1 to $2"
 mkdir -p $2
 cd $2
 wget \
+     --backups 0 \
      --recursive \
      --page-requisites \
      --convert-links \
@@ -13,11 +14,17 @@ jekyll_delimiter="---"
 if [ $file_start == $jekyll_delimiter ]
 then
   echo "File already processed"
- # exit 0
+  exit 0
 fi
 
 echo '---
 
 ---' | cat - index.html > temp && mv temp index.html
-cat '{% include analytics %}' >> index.html
+echo "{% include analytics %}" >> index.html
 
+echo "*************************************************************************"
+echo "Done, now feel free to edit the $2/index.html file as required and then upload to Github"
+echo ""
+echo "For more information on uploading to Github please see:"
+echo "    https://w.olioex.com/index.php/Tech:Marketing:CampaignSite"
+echo "*************************************************************************"
